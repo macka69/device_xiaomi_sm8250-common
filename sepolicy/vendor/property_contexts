@@ -17,6 +17,7 @@ persist.vendor.power.dfps.level                 u:object_r:vendor_display_prop:s
 persist.vendor.fpc.                             u:object_r:vendor_fp_prop:s0
 persist.vendor.sys.fp.                          u:object_r:vendor_fp_prop:s0
 ro.hardware.fp                                  u:object_r:vendor_fp_prop:s0
+sys.panel.                                      u:object_r:vendor_fp_prop:s0
 vendor.fps_hal.                                 u:object_r:vendor_fp_prop:s0
 ro.boot.fpsensor                                u:object_r:vendor_fp_prop:s0
 
