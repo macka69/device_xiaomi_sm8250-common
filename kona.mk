@@ -179,6 +179,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     vendor.xiaomi.hardware.motor@1.0.vendor
 
+# Charger
+PRODUCT_PACKAGES += \
+    libsuspend
+
 # Configstore
 PRODUCT_PACKAGES += \
     disable_configstore
