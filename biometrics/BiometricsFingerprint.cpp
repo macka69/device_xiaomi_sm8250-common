@@ -104,6 +104,8 @@ BiometricsFingerprint::BiometricsFingerprint() : mClientCallback(nullptr), mDevi
         }
     }
 
+    touch_fd_ = android::base::unique_fd(open(TOUCH_DEV_PATH, O_RDWR));
+
 #ifdef FOD
     std::thread([this]() {
         int fd = open(FOD_UI_PATH, O_RDONLY);
@@ -450,11 +452,13 @@ Return<bool> BiometricsFingerprint::isUdfps(uint32_t /*sensorId*/) {
 
 Return<void> BiometricsFingerprint::onFingerDown(uint32_t /*x*/, uint32_t /*y*/,
         float /*minor*/, float /*major*/) {
+    int arg[2] = {Touch_Fod_Enable, FOD_STATUS_ON};
+    ioctl(touch_fd_.get(), TOUCH_IOC_SETMODE, &arg);
     return Void();
 }
 
 Return<void> BiometricsFingerprint::onFingerUp() {
-    set(DISPPARAM_PATH, DISPPARAM_FOD_HBM_OFF);
+    set(DISPPARAM_PATH, DISPPARAM_FOD_HBM_OFF);  
     return Void();
 }
 
