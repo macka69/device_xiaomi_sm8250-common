@@ -7,10 +7,16 @@
 PRODUCT_BUILD_SUPER_PARTITION := false
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
 
+YOUR_HW_PLATFORM := kona
+
+# Board
+PRODUCT_BOARD_PLATFORM := $(YOUR_HW_PLATFORM)
+PRODUCT_USES_QCOM_HARDWARE := true
+TARGET_BOARD_PLATFORM := kona
+
 # Overlays
 DEVICE_PACKAGE_OVERLAYS += \
     $(LOCAL_PATH)/overlay \
-    $(LOCAL_PATH)/overlay-lineage
 
 PRODUCT_ENFORCE_RRO_TARGETS := *
 PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += $(LOCAL_PATH)/overlay/packages/apps/CarrierConfig
@@ -266,10 +272,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.light-service.xiaomi
 
-# LiveDisplay
-PRODUCT_PACKAGES += \
-    vendor.lineage.livedisplay@2.0-service-sdm
-
 # Media
 PRODUCT_PACKAGES += \
     libavservices_minijail \
@@ -337,18 +339,11 @@ PRODUCT_PACKAGES += \
 
 # Perf
 PRODUCT_PACKAGES += \
-    libqti-perfd-client
+    vendor.qti.hardware.perf@2.2.vendor
 
 # Power
-PRODUCT_PACKAGES += \
-    android.hardware.power-service.xiaomi-libperfmgr
-
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/powerhint.json:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint.json
-
-PRODUCT_SOONG_NAMESPACES += \
-    hardware/google/interfaces \
-    hardware/google/pixel
+    vendor/qcom/opensource/power/config/kona/powerhint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint.xml
 
 # Public libraries
 PRODUCT_COPY_FILES += \
@@ -401,10 +396,18 @@ PRODUCT_PACKAGES += \
     android.hardware.sensors@1.0-service \
     libsensorndkbridge
 
+# HALS
+SRC_AUDIO_HAL_DIR := vendor/qcom/opensource/audio-hal/primary-hal
+SRC_DISPLAY_HAL_DIR := hardware/qcom/display
+SRC_MEDIA_HAL_DIR := hardware/qcom/media
+
 # Soong namespaces
 PRODUCT_SOONG_NAMESPACES += \
     $(LOCAL_PATH) \
-    hardware/xiaomi
+    hardware/xiaomi \
+    vendor/qcom/opensource/audio-hal/primary-hal \
+    hardware/qcom/display \
+    hardware/qcom/media
 
 # Telephony
 PRODUCT_PACKAGES += \
