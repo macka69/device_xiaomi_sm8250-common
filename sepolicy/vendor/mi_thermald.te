@@ -27,4 +27,5 @@ allow mi_thermald {
   lnk_file
 } rw_file_perms;
 
-set_prop(mi_thermald, thermal_normal_prop)
+# Allow mi_thermald to set thermal profile
+set_prop(mi_thermald, vendor_thermal_normal_prop)
