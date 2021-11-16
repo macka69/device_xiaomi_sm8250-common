@@ -304,7 +304,7 @@ PRODUCT_PACKAGES += \
     netutils-wrapper-1.0
 
 PRODUCT_PACKAGES += \
-    android.system.net.netd@1.1.vendor \
+    android.system.net.netd@1.1.vendor
 
 # Neural networks
 PRODUCT_PACKAGES += \
@@ -314,6 +314,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.nfc_snxxx@1.2-service \
     android.hardware.secure_element_snxxx@1.2-service \
+    android.hardware.secure_element@1.1.vendor \
     com.android.nfc_extras \
     libchrome.vendor \
     NfcNci \
@@ -349,28 +350,26 @@ PRODUCT_COPY_FILES += \
 
 # QMI
 PRODUCT_PACKAGES += \
-    libjson \
-    libqti_vndfwk_detect \
-    libqti_vndfwk_detect.vendor \
-    libvndfwk_detect_jni.qti \
-    libvndfwk_detect_jni.qti.vendor
-
+    libjson 
+    
 # QTI-Components
 TARGET_BOARD_PLATFORM := kona
 TARGET_COMMON_QTI_COMPONENTS := \
-    bt 
+    bt \
+    telephony
 
 # RIL
 PRODUCT_PACKAGES += \
-    android.hardware.secure_element@1.1.vendor \
     libprotobuf-cpp-full \
     librmnetctl \
     libxml2
 
 PRODUCT_PACKAGES += \
-    android.hardware.radio@1.6.vendor \
     android.hardware.radio.config@1.3.vendor \
-    android.hardware.radio.deprecated@1.0.vendor
+    android.hardware.radio.config@1.0 \
+    android.hardware.radio.deprecated@1.0.vendor \
+    android.hardware.secure_element@1.1.vendor \
+    android.hardware.secure_element@1.2.vendor
 
 # Rootdir
 PRODUCT_PACKAGES += \
@@ -416,20 +415,18 @@ PRODUCT_SOONG_NAMESPACES += \
 
 # Telephony
 PRODUCT_PACKAGES += \
-    extphonelib \
-    extphonelib-product \
-    extphonelib.xml \
-    extphonelib_product.xml \
     ims-ext-common \
     ims_ext_common.xml \
     qti-telephony-hidl-wrapper \
     qti_telephony_hidl_wrapper.xml \
+    qti-telephony-hidl-wrapper-prd \
+    qti_telephony_hidl_wrapper_prd.xml \
     qti-telephony-utils \
     qti_telephony_utils.xml \
     telephony-ext
 
-PRODUCT_BOOT_JARS += \
-    telephony-ext
+#PRODUCT_BOOT_JARS += \
+#    telephony-ext
 
 # Thermal
 PRODUCT_PACKAGES += \
