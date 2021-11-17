@@ -341,8 +341,8 @@ PRODUCT_PACKAGES += \
     vendor.qti.hardware.perf@2.2.vendor
 
 # Power
-PRODUCT_COPY_FILES += \
-    vendor/qcom/opensource/power/config/kona/powerhint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint.xml
+PRODUCT_PACKAGES += \
+    android.hardware.power-service-qti
 
 # Public libraries
 PRODUCT_COPY_FILES += \
