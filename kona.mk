@@ -7,10 +7,7 @@
 PRODUCT_BUILD_SUPER_PARTITION := false
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
 
-YOUR_HW_PLATFORM := kona
-
 # Board
-PRODUCT_BOARD_PLATFORM := $(YOUR_HW_PLATFORM)
 PRODUCT_USES_QCOM_HARDWARE := true
 TARGET_BOARD_PLATFORM := kona
 
@@ -339,7 +336,10 @@ PRODUCT_PACKAGES += \
 
 # Power
 PRODUCT_PACKAGES += \
-    android.hardware.power-service-qti
+    android.hardware.power-service
+
+PRODUCT_COPY_FILES += \
+   $(LOCAL_PATH)/power/config/kona/powerhint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint.xml
 
 # Public libraries
 PRODUCT_COPY_FILES += \
