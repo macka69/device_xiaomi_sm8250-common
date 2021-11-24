@@ -383,7 +383,6 @@ PRODUCT_PACKAGES += \
     init.nfc.rc \
     init.qcom.power.rc \
     init.qcom.rc \
-    init.safailnet.rc \
     init.target.rc \
     init.qcom.usb.rc \
     fstab.qcom \
