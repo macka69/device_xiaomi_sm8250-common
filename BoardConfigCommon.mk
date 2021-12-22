@@ -65,9 +65,7 @@ TARGET_USES_GRALLOC1 := true
 TARGET_USES_GRALLOC4 := true
 TARGET_USES_HWC2 := true
 TARGET_USES_ION := true
-ifeq ($(TARGET_HAS_FOD),true)
 TARGET_USES_FOD_ZPOS := true
-endif
 
 # DRM
 TARGET_ENABLE_MEDIADRM_64 := true
@@ -76,9 +74,7 @@ TARGET_ENABLE_MEDIADRM_64 := true
 TARGET_FS_CONFIG_GEN := $(COMMON_PATH)/config.fs
 
 # Fingerprint
-ifeq ($(TARGET_HAS_FOD),true)
 TARGET_SURFACEFLINGER_UDFPS_LIB := //$(COMMON_PATH):libudfps_extension.xiaomi_kona
-endif
 
 # HIDL
 DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE := $(COMMON_PATH)/framework_compatibility_matrix.xml 

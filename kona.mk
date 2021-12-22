@@ -264,10 +264,8 @@ PRODUCT_PACKAGES += \
     fastbootd
 
 # Fingerprint
-ifeq ($(TARGET_HAS_FOD),true)
 PRODUCT_PACKAGES += \
     vendor.goodix.hardware.biometrics.fingerprint@2.1.vendor
-endif
 
 PRODUCT_PACKAGES += \
     android.hardware.biometrics.fingerprint@2.3-service.xiaomi_kona
@@ -375,7 +373,8 @@ PRODUCT_PACKAGES += \
 
 # Power
 PRODUCT_PACKAGES += \
-    android.hardware.power-service-qti
+    android.hardware.power-service-qti \
+    vendor.qti.hardware.perf@2.2.vendor
 
 # Public libraries
 PRODUCT_COPY_FILES += \
