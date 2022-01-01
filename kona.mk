@@ -385,7 +385,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     init.motor.rc \
     init.nfc.rc \
-    init.qcom.power.rc \
     init.qcom.rc \
     init.target.rc \
     init.qcom.usb.rc \
