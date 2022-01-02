@@ -305,13 +305,14 @@
         <transport>hwbinder</transport>
         <fqname>@2.2::IPerf/default</fqname>
     </hal>
+        <hal format="hidl">
+        <name>vendor.xiaomi.hardware.motor</name>
+        <transport>hwbinder</transport>
+        <fqname>@1.0::IMotor/default</fqname>
+    </hal>
     <hal format="hidl">
         <name>vendor.xiaomi.hardware.touchfeature</name>
         <transport>hwbinder</transport>
         <fqname>@1.0::ITouchFeature/default</fqname>
-    </hal>
-        <name>vendor.xiaomi.hardware.motor</name>
-        <transport>hwbinder</transport>
-        <fqname>@1.0::IMotor/default</fqname>
     </hal>
 </manifest>
