@@ -149,4 +149,9 @@ public class DozeSettingsFragment extends PreferenceFragment implements OnPrefer
                     .commit();
         }
     }
+    
+    private void showHelp() {
+        HelpDialogFragment fragment = new HelpDialogFragment();
+        fragment.show(getFragmentManager(), "help_dialog");
+    }
 }
