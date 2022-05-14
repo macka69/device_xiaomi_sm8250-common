@@ -19,6 +19,7 @@
 #define ANDROID_HARDWARE_BIOMETRICS_FINGERPRINT_V2_3_BIOMETRICSFINGERPRINT_H
 
 #include <log/log.h>
+#include <android-base/unique_fd.h>
 #include <android/log.h>
 #include "xiaomi_fingerprint.h"
 #include <hidl/MQDescriptor.h>
@@ -86,6 +87,7 @@ private:
     sp<IBiometricsFingerprintClientCallback> mClientCallback;
     xiaomi_fingerprint_device_t *mDevice;
     bool mFod;
+    android::base::unique_fd touch_fd_;
 };
 
 }  // namespace implementation
