@@ -31,7 +31,10 @@ public class PopupCameraSettingsFragment
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         addPreferencesFromResource(R.xml.popup_settings);
-        getActivity().getActionBar().setDisplayHomeAsUpEnabled(true);
+        
+        if (getActivity().getActionBar() != null) {
+            getActivity().getActionBar().setDisplayHomeAsUpEnabled(true);
+        }
     }
 
     @Override
