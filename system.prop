@@ -47,9 +47,6 @@ ro.vendor.qti.core_ctl_min_cpu=2
 # Netmgr
 persist.vendor.data.mode=concurrent
 
-# SSR
-persist.vendor.ssr.restart_level=ALL_ENABLE
-
 # ZRAM writeback
 ro.zram.mark_idle_delay_mins=60
 ro.zram.first_wb_delay_mins=180
