@@ -7,10 +7,12 @@
 PRODUCT_BUILD_SUPER_PARTITION := false
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
 
+# Board
+TARGET_BOARD_PLATFORM := kona
+
 # Overlays
 DEVICE_PACKAGE_OVERLAYS += \
-    $(LOCAL_PATH)/overlay \
-    $(LOCAL_PATH)/overlay-bliss
+    $(LOCAL_PATH)/overlay 
 
 PRODUCT_ENFORCE_RRO_TARGETS := *
 PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += $(LOCAL_PATH)/overlay/packages/apps/CarrierConfig
@@ -296,10 +298,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.light-service.xiaomi
 
-# LiveDisplay
-PRODUCT_PACKAGES += \
-    vendor.lineage.livedisplay@2.0-service-sdm
-
 # Media
 PRODUCT_PACKAGES += \
     libavservices_minijail \
@@ -355,18 +353,11 @@ PRODUCT_PACKAGES += \
 
 # Perf
 PRODUCT_PACKAGES += \
-    libqti-perfd-client
+    vendor.qti.hardware.perf@2.2.vendor
 
 # Power
 PRODUCT_PACKAGES += \
-    android.hardware.power-service.xiaomi-libperfmgr
-
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/powerhint.json:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint.json
-
-PRODUCT_SOONG_NAMESPACES += \
-    hardware/google/interfaces \
-    hardware/google/pixel
+    android.hardware.power-service-qti
 
 # Public libraries
 PRODUCT_COPY_FILES += \
@@ -421,7 +412,10 @@ PRODUCT_PACKAGES += \
 # Soong namespaces
 PRODUCT_SOONG_NAMESPACES += \
     $(LOCAL_PATH) \
-    hardware/xiaomi
+    hardware/xiaomi \
+    vendor/qcom/opensource/audio-hal/primary-hal \
+    hardware/qcom/display \
+    hardware/qcom/media
 
 # Telephony
 PRODUCT_PACKAGES += \
@@ -442,7 +436,7 @@ PRODUCT_PACKAGES += \
 
 # USB
 PRODUCT_PACKAGES += \
-    android.hardware.usb@1.3-service-qti
+    android.hardware.usb@1.2-service-qti
 
 PRODUCT_PACKAGES += \
     init.qcom.usb.rc \
