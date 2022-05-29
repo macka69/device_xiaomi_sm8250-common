@@ -542,6 +542,30 @@
         </interface>
     </hal>
     <hal format="hidl" optional="true">
+        <name>android.hardware.bluetooth.audio</name>
+        <version>2.1</version>
+        <interface>
+            <name>IBluetoothAudioProvidersFactory</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+        <hal format="hidl" optional="true">
+        <name>vendor.qti.hardware.servicetracker</name>
+        <version>1.2</version>
+        <interface>
+            <name>IServicetracker</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+        <hal format="hidl" optional="true">
+        <name>vendor.qti.memory.pasrmanager</name>
+        <version>1.1</version>
+        <interface>
+            <name>IPasrManager</name>
+            <instance>pasrhal</instance>
+        </interface>
+    </hal>
+        <hal format="hidl" optional="true">
         <name>vendor.xiaomi.hardware.touchfeature</name>
         <version>1.0</version>
         <interface>
