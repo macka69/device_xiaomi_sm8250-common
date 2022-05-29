@@ -1,5 +1,7 @@
-# Bluetooth
-ro.bluetooth.library_name=libbluetooth_qti.so
+# Audio
+persist.audio.button_jack.profile=volume
+persist.audio.button_jack.switch=0
+tunnel.audio.encode=true
 
 # Camera
 camera.disable_zsl_mode=true
