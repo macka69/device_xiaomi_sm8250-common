@@ -24,7 +24,7 @@
 #include "xiaomi_fingerprint.h"
 #include "BiometricsFingerprint.h"
 
-#include <cutils/properties.h>
+#include <fstream>
 #include <inttypes.h>
 #include <poll.h>
 #include <thread>
@@ -42,16 +42,12 @@ static const uint16_t kVersion = HARDWARE_MODULE_API_VERSION(2, 1);
 
 // List of fingerprint HALs
 static const char *kHALClasses[] = {
-    "fpc",
     "fpc_fod",
-    "goodix",
     "goodix_fod",
-    "goodix_fod6",
 };
 
 using RequestStatus =
         android::hardware::biometrics::fingerprint::V2_1::RequestStatus;
-using ::android::base::GetBoolProperty;
 
 BiometricsFingerprint *BiometricsFingerprint::sInstance = nullptr;
 
@@ -66,8 +62,16 @@ BiometricsFingerprint *BiometricsFingerprint::sInstance = nullptr;
 #define Touch_Fod_Enable 10
 #define TOUCH_MAGIC 0x5400
 #define TOUCH_IOC_SETMODE TOUCH_MAGIC + 0
+#define DISPPARAM_FOD_HBM_OFF "0xE0000"
 
+#define DISPPARAM_PATH "/sys/devices/platform/soc/ae00000.qcom,mdss_mdp/drm/card0/card0-DSI-1/disp_param"
 #define FOD_UI_PATH "/sys/devices/platform/soc/soc:qcom,dsi-display-primary/fod_ui"
+
+template <typename T>
+static void set(const std::string& path, const T& value) {
+    std::ofstream file(path);
+    file << value;
+}
 
 static bool readBool(int fd) {
     char c;
@@ -96,16 +100,12 @@ BiometricsFingerprint::BiometricsFingerprint() : mClientCallback(nullptr), mDevi
             ALOGE("Can't open HAL module, class %s", class_name);
         } else {
             ALOGI("Opened fingerprint HAL, class %s", class_name);
-            property_set("persist.vendor.sys.fp.vendor", class_name); // fix AliPay TouchID
             break;
         }
     }
     
     touch_fd_ = android::base::unique_fd(open(TOUCH_DEV_PATH, O_RDWR));
-    
-    mFod = GetBoolProperty("vendor.lineage.fod.enable", false);
 
-    if (mFod) {
         std::thread([this]() {
             int fd = open(FOD_UI_PATH, O_RDONLY);
             if (fd < 0) {
@@ -124,12 +124,11 @@ BiometricsFingerprint::BiometricsFingerprint() : mClientCallback(nullptr), mDevi
                 if (rc < 0) {
                     LOG(ERROR) << "failed to poll fd, err: " << rc;
                     continue;
-                }
+                }  
 
                 extCmd(COMMAND_NIT, readBool(fd) ? PARAM_NIT_FOD : PARAM_NIT_NONE);
             }
-        }).detach();
-    }
+    }).detach();
 }
 
 BiometricsFingerprint::~BiometricsFingerprint() {
@@ -442,19 +441,20 @@ void BiometricsFingerprint::notify(const fingerprint_msg_t *msg) {
 }
 
 Return<bool> BiometricsFingerprint::isUdfps(uint32_t /*sensorId*/) {
-    return mFod;
+    return true;
 }
 
 Return<void> BiometricsFingerprint::onFingerDown(uint32_t /*x*/, uint32_t /*y*/,
         float /*minor*/, float /*major*/) {
     int arg[2] = {Touch_Fod_Enable, FOD_STATUS_ON};
     ioctl(touch_fd_.get(), TOUCH_IOC_SETMODE, &arg);
+
     return Void();
 }
 
 Return<void> BiometricsFingerprint::onFingerUp() {
-    int arg[2] = {Touch_Fod_Enable, FOD_STATUS_OFF};
-    ioctl(touch_fd_.get(), TOUCH_IOC_SETMODE, &arg);
+    set(DISPPARAM_PATH, DISPPARAM_FOD_HBM_OFF);
+
     return Void();
 }
 
