@@ -1,0 +1,3 @@
+dontaudit devicesettings_app system_data_file:dir search;
+dontaudit devicesettings_app user_profile_root_file:dir search;
+dontaudit devicesettings_app default_prop:file read;
